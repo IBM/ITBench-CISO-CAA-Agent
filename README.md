@@ -8,7 +8,7 @@ CISO (Chief Information Security Officer) agents automate compliance assessments
 - Access to an OpenAI-Compatible LLM service
   - tested with `IBM watsonx.ai`, `OpenAI` and `Azure OpenAI Service`.
 - [Sample Task Scenario](https://github.com/IBM/it-bench-sample-scenarios.git) setup
-  - This requires 1 Kubernetes cluster and/or 1 RHEL host. For more details, please refer to its README.
+  - This requires 1 Kubernetes cluster and/or 1 RHEL host. For more details, please refer to its [README](https://github.com/IBM/it-bench-sample-scenarios/tree/main/ciso#readme).
 - `python` command (tested with `3.11` )
 - `docker` or `podman` command (tested with docker `26.1.0` and podman `5.1.2` )
 
