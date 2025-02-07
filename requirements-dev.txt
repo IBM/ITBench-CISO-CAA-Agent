@@ -211,7 +211,7 @@ tomli_w==1.2.0
 tqdm==4.67.1
 trace-attributes==7.1.2
 traitlets==5.14.3
-transformers==4.35.2
+transformers==4.38.0
 trio==0.28.0
 trio-websocket==0.11.1
 typer==0.15.1
