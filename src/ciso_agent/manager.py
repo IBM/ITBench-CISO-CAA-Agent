@@ -25,7 +25,7 @@ from langgraph.graph import END, StateGraph
 from ciso_agent.agents.kubernetes_kubectl_opa import KubernetesKubectlOPACrew
 from ciso_agent.agents.kubernetes_kyverno import KubernetesKyvernoCrew
 from ciso_agent.agents.rhel_playbook_opa import RHELPlaybookOPACrew
-from ciso_agent.llm import call_llm, extract_code
+from ciso_agent.llm import get_llm_params, call_llm, extract_code
 
 load_dotenv()
 
@@ -136,9 +136,7 @@ class CISOManager:
     def task_selector(self, state: CISOState):
         goal = state["goal"]
 
-        manager_model = os.getenv("MANAGER_AGENT_MODEL_NAME", "gpt-4o-mini")
-        manager_api_key = os.getenv("MANAGER_AGENT_API_KEY")
-        manager_api_url = os.getenv("MANAGER_AGENT_API_URL")
+        manager_model, manager_api_url, manager_api_key = get_llm_params()
         summary_prompt = f"""Extract some required information from the following goal.
 Please return a parsable JSON string.
 If some info is not provided, set empty string to it.
@@ -280,10 +278,7 @@ Generated Policy:
 ```
 
 """
-
-        manager_model = os.getenv("MANAGER_AGENT_MODEL_NAME", "gpt-4o-mini")
-        manager_api_key = os.getenv("MANAGER_AGENT_API_KEY")
-        manager_api_url = os.getenv("MANAGER_AGENT_API_URL")
+        manager_model, manager_api_url, manager_api_key = get_llm_params()
 
         goal = state["goal"]
 
