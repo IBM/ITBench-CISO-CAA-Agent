@@ -24,7 +24,9 @@ api_domain_watsonx = "cloud.ibm.com"
 api_domain_azure = "azure.com"
 api_domain_azure_api = "azure-api.net"
 
-def init_agent_llm(model: str = "", api_url: str = "", api_key: str = ""):
+# Retreives and Returns Model, API URL and API key in that order from .env
+def get_llm_params(model: str = "", api_url: str = "", api_key: str = ""):
+    # get model
     model = model or os.getenv("LLM_MODEL_NAME") or os.getenv("OPENAI_MODEL_NAME")
     if not model:
         raise ValueError("Env variable `OPENAI_MODEL_NAME` is not set")
@@ -34,6 +36,11 @@ def init_agent_llm(model: str = "", api_url: str = "", api_key: str = ""):
 
     # get API key (if API is ollama, API key is not necessary)
     api_key = api_key or os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY")
+
+    return model, api_url, api_key
+
+def init_agent_llm(model: str = "", api_url: str = "", api_key: str = ""):
+    model, api_url, api_key = get_llm_params()
 
     temperature = float(os.getenv("LLM_TEMPERATURE", "0.0"))
 
@@ -70,15 +77,7 @@ def init_agent_llm(model: str = "", api_url: str = "", api_key: str = ""):
 
 
 def init_llm(model: str = "", api_url: str = "", api_key: str = ""):
-    model = model or os.getenv("LLM_MODEL_NAME") or os.getenv("OPENAI_MODEL_NAME")
-    if not model:
-        raise ValueError("Env variable `OPENAI_MODEL_NAME` is not set")
-
-    # get API URL
-    api_url = api_url or os.getenv("LLM_BASE_URL") or os.getenv("MODEL_API_URL")
-
-    # get API key (if API is ollama, API key is not necessary)
-    api_key = api_key or os.getenv("LLM_API_KEY") or os.getenv("OPENAI_API_KEY")
+    model, api_url, api_key = get_llm_params()
 
     temperature = float(os.getenv("LLM_TEMPERATURE", "0.0"))
 
