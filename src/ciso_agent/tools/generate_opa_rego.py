@@ -120,7 +120,7 @@ for this example input data.
 }
 ```
 """
-        model, api_key, api_url = get_llm_params()
+        model, api_url, api_key = get_llm_params()
         print(f"Generating OPA Rego policy code with '{model}'")
         print("Prompt:", prompt)
         answer = call_llm(prompt, model=model, api_key=api_key, api_url=api_url)
