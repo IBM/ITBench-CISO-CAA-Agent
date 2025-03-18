@@ -16,7 +16,7 @@ import json
 import os
 from typing import Callable, Union
 
-from ciso_agent.llm import call_llm, extract_code
+from ciso_agent.llm import get_llm_params, call_llm, extract_code
 from ciso_agent.tools.utils import trim_quote
 from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
@@ -108,11 +108,10 @@ spec:
           namespace: "!default"
 ```
 """
-        model = os.getenv("CODE_GEN_MODEL")
-        api_key = os.getenv("CODE_GEN_API_KEY")
+        model, api_url, api_key = get_llm_params()
         print(f"Generating Kyverno policy code with '{model}'")
         print("Prompt:", prompt)
-        answer = call_llm(prompt, model=model, api_key=api_key)
+        answer = call_llm(prompt, model=model, api_key=api_key, api_url=api_url)
         code = extract_code(answer, code_type="yaml")
         policy_file = policy_file.strip('"').strip("'").lstrip("{").rstrip("}")
         if not policy_file:
