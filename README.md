@@ -136,7 +136,7 @@ $ docker run --rm -ti --name ciso-agent \
     -v <PATH/TO/DOT_ENV_FILE>:/etc/ciso-agent/.env \
     ciso-agent:latest \
     python src/ciso_agent/main.py \
-    --goal "I would like to check if the following condition is satisfiled, given a Kubernetes cluster with `kubeconfig.yaml`
+    --goal 'I would like to check if the following condition is satisfiled, given a Kubernetes cluster with `kubeconfig.yaml`
     Minimize the admission of containers wishing to share the host network namespace.
 
 To check the condition, do the following steps.
@@ -147,7 +147,7 @@ If deploying the policy failed and if you can fix the issue, you will do it and 
 Once you get a final answer, you can quit the work.
 
 The cluster's kubeconfig is at `/tmp/agent/kubeconfig.yaml`.
-You can use `/tmp/agent` as your workdir." \
+You can use `/tmp/agent` as your workdir.' \
     --auto-approve
 ```
 
